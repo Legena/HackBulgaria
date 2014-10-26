@@ -36,9 +36,9 @@ class Store():
         else:
             self.products[product] = count
 
-    def list_products(self, Product):
+    def list_products(self, product_class):
         for product in self.products:
-            if isinstance(product, Product):
+            if isinstance(product, product_class):
                 print(product.name, self.products[product])
 
     def sell_product(self, product):
