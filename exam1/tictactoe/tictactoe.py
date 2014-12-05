@@ -44,16 +44,32 @@ def computer_move(board):
 
 
 def player_move(board):
-    move = -1
-    while(move >= 9 or move < 0 and board[move] == 0):
+    move = int(input("Enter move (0..8)>"))
+    while(True):
+        if board[move] == 0:
+            board[move] = -1
+            break
+        else:
+            print("Invalid move!")
         move = int(input("Enter move (0..8)>"))
-    board[move] = -1
+
+
+
+def get_value(number):
+    if number == -1:
+        return 'X'
+    elif number == 0:
+        return '-'
+    else:
+        return 'O'
 
 
 def print_board(board):
-    for x in range(0, 3):
-        print("{}|{}|{}".format(board[3*x + 0], board[3*x + 1], board[3*x + 2]))
-
+    for i in range(0, 3):
+        a = get_value(board[i*3])
+        b = get_value(board[i*3 + 1])
+        c = get_value(board[i*3 + 2])
+        print("{}|{}|{}".format(a, b, c))
 
 def main():
     board = [0, 0, 0, 0, 0, 0, 0, 0, 0]
@@ -61,10 +77,10 @@ def main():
     for turn in range(0, 9):
         if(is_winner(board) == 0):
             if turn % 2 == 0:
+                print_board(board)
                 player_move(board)
             else:
                 computer_move(board)
-            print_board(board)
     print(is_winner(board))
 
 
